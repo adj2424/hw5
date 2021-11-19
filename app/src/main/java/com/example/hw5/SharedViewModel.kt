@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel: ViewModel() {
     var locationItemList = mutableListOf(
-        LocationItem("hi", "hi", "hi", 0))
+        LocationItem("hi", "hi", "hi", ""))
 
     var address: String = ""
     var coordinates: String = ""
