@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnItemListener {
 
     private var recyclerView: RecyclerView?= null
+    private lateinit var model: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             LocationItem("address", "coordinates", "time", 0),
             LocationItem("address", "coordinates", "time", 0)
         )
-        val adapter = Adapter(locationItemList)
+        val adapter = Adapter(locationItemList, this)
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(this)
         var itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -33,5 +34,11 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
 
+    }
+
+    override fun onItemClick(item: LocationItem, position: Int) {
+        model.address = item.address
+        model.coordinates = item.coordinates
+        model.time = item.time
     }
 }
